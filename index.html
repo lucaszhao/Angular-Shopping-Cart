@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
+</head>
+<body ng-app="myApp">
+
+    <div class="container" ng-controller="CartController">
+        <table class="table" ng-show="!!cart.length">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>No.</th>
+                    <th>Item Price</th>
+                    <th>Total Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in cart">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td class="input-group">
+                        <button type="button" class="btn btn-info" ng-click="reduce(item.id)">
+                            -
+                        </button>
+                        <input type="text" value="{{item.quantity}}" ng-model="item.quantity" />
+                        <button type="button" class="btn btn-info" ng-click="add(item.id)">
+                            +
+                        </button>
+                    </td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.price * item.quantity}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" ng-click="remove(item.id)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Price: {{totalPrice()}}</td>
+                    <td colspan="2">Total Quantity: {{totalQuantity()}}</td>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-danger" ng-click="cart=[]">
+                            Clear the Cart!
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p ng-show="!cart.length">Your Shopping Cart is empty!</p>
+    </div>
+
+    <script type="text/javascript" src="../vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="app/index.js"></script>
+</body>
+</html>
